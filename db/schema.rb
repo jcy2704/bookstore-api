@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2021_03_29_222058) do
 
   create_table "books", force: :cascade do |t|
     t.text "title"
-    t.text "author"
+    t.text "author", default: ""
     t.text "category"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
