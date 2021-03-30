@@ -42,3 +42,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "devise", "~> 4.7"
 
 gem "devise-jwt", "~> 0.8.1"
+
+gem "jsonapi-rails", "~> 0.4.0"
