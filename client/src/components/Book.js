@@ -1,21 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { deleteBook } from '../api_methods/api';
+import { deleteBook } from '../javascripts/api_methods/api';
 
 const author = (book) => {
   if (book.author === '') {
     return ''
   }
-
-  if (book.author !== '') {
-    return (
-      <>
-        Author:
-        {' '}
-        {book.author}
-      </>
-    )
-  }
+  return (
+    <>
+      Author:
+      {' '}
+      {book.author}
+    </>
+  )
 }
 
 const Book = ({ book, delete: handleRemoveBook }) => (

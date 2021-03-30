@@ -1,30 +1,22 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable max-len */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Book from '../components/Book';
 import { loadBooks, removeBook } from '../actions/index';
-import { getBooks } from '../api_methods/api';
+import { getBooks } from '../javascripts/api_methods/api';
+import { filteredBooks } from '../javascripts/filter';
 
 const BooksList = ({
   books, filter, delete: handleRemoveBook, loader
 }) => {
   useEffect(() => {
     getBooks(loader);
-  }, []);
-
-  const filteredBooks = () => {
-    if (filter === 'All') {
-      return books.sort((a, b) => a.id - b.id);
-    }
-    return books.filter(book => book.category === filter).sort((a, b) => a.id - b.id);
-  };
+  }, [loader]);
 
   return (
     <>
       <ul className="books-cards-cont">
-        {filteredBooks().map(book => <Book key={book.id} book={book} delete={handleRemoveBook} />)}
+        {filteredBooks(books, filter).map(book => <Book key={book.id} book={book} delete={handleRemoveBook} />)}
       </ul>
       <div className="form-divider" />
     </>
