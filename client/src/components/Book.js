@@ -1,6 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const author = (book) => {
+  if (book.author === '') {
+    return ''
+  }
+
+  if (book.author !== '') {
+    return (
+      <>
+        Author:
+        {' '}
+        {book.author}
+      </>
+    )
+  }
+}
+
 const Book = ({ book, delete: handleRemoveBook }) => (
   <li className="book-card flex align-c">
     <div>
@@ -12,9 +28,7 @@ const Book = ({ book, delete: handleRemoveBook }) => (
           <h3 className="book-title">{book.title}</h3>
         </div>
         <div className="book-id fw-300">
-          Book ID:
-          {' '}
-          {book.id}
+          {author(book)}
         </div>
       </div>
 

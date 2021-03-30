@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import { createBook } from '../actions';
 
@@ -17,9 +18,17 @@ const BooksForm = ({ bookCreator }) => {
     }
   };
 
+  const addBookToApi = (bookInfo) => {
+    axios.post('/api/v1/books', bookInfo)
+    .then(response => {
+      bookCreator(response.data);
+    })
+    .catch(error => console.log(error))
+  };
+
   const handleSubmit = () => {
     if (bookInfo.title !== '' && bookInfo.category !== '') {
-      bookCreator(bookInfo);
+      addBookToApi(bookInfo);
       setBookInfo({ title: '', category: '' });
     } else {
       setBookInfo({ ...bookInfo });
@@ -34,7 +43,7 @@ const BooksForm = ({ bookCreator }) => {
         <h2 className="add-new-book">ADD NEW BOOK</h2>
         <div className="flex just-sb">
           <input onChange={handleChange} id="titleInput" type="text" value={bookInfo.title} placeholder="Book Title" />
-          <select id="categoryInput" className="pointer" onChange={handleChange} value="">
+          <select id="categoryInput" className="pointer" onChange={handleChange} value={bookInfo.category}>
             <option className="categories-option" value="" disabled>Categories</option>
             {categories.map(cat => (
               <option key={cat} value={cat}>{cat}</option>

@@ -13,7 +13,7 @@ const bookReducer = (state = [], action) => {
       return action.books;
     case CREATE_BOOK:
       return [
-        ...state, { id: randInt(1, 1000), title: action.book.title, category: action.book.category },
+        ...state, { title: action.book.title, category: action.book.category },
       ];
     case REMOVE_BOOK:
       return state.filter(book => book.id !== action.book.id);

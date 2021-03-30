@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable max-len */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
@@ -10,7 +11,7 @@ const BooksList = ({
   books, filter, delete: handleRemoveBook, loader
 }) => {
   const getBooks = () => {
-    axios.get('/v1/books')
+    axios.get('api/v1/books')
       .then(response => {
         loader(response.data)
       })
@@ -19,7 +20,7 @@ const BooksList = ({
 
   useEffect(() => {
     getBooks();
-  });
+  }, []);
 
   const filteredBooks = () => {
     if (filter === 'All') {
@@ -48,7 +49,7 @@ BooksList.propTypes = {
   ).isRequired,
   delete: PropTypes.func.isRequired,
   filter: PropTypes.string.isRequired,
-  load: PropTypes.func.isRequired,
+  loader: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({ books: state.books, filter: state.filter });
