@@ -3,23 +3,15 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import Book from '../components/Book';
 import { loadBooks, removeBook } from '../actions/index';
+import { getBooks } from '../api_methods/api';
 
 const BooksList = ({
   books, filter, delete: handleRemoveBook, loader
 }) => {
-  const getBooks = () => {
-    axios.get('api/v1/books')
-      .then(response => {
-        loader(response.data)
-      })
-      .catch(error => console.log(error))
-  }
-
   useEffect(() => {
-    getBooks();
+    getBooks(loader);
   }, []);
 
   const filteredBooks = () => {

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import { createBook } from '../actions';
+import { addBookToApi } from '../api_methods/api';
 
 const BooksForm = ({ bookCreator }) => {
   const [bookInfo, setBookInfo] = useState({
@@ -18,17 +18,9 @@ const BooksForm = ({ bookCreator }) => {
     }
   };
 
-  const addBookToApi = (bookInfo) => {
-    axios.post('/api/v1/books', bookInfo)
-    .then(response => {
-      bookCreator(response.data);
-    })
-    .catch(error => console.log(error))
-  };
-
   const handleSubmit = () => {
     if (bookInfo.title !== '' && bookInfo.category !== '') {
-      addBookToApi(bookInfo);
+      addBookToApi(bookInfo, bookCreator);
       setBookInfo({ title: '', category: '' });
     } else {
       setBookInfo({ ...bookInfo });

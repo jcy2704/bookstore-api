@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+import { deleteBook } from '../api_methods/api';
 
 const author = (book) => {
   if (book.author === '') {
@@ -18,16 +18,7 @@ const author = (book) => {
   }
 }
 
-const Book = ({ book, delete: handleRemoveBook }) => {
-  const deleteBook = (id) => {
-    axios.delete(`/api/v1/books/${id}`)
-    .then(response => {
-      handleRemoveBook(book)
-    })
-    .catch(error => console.log(error))
-  }
-
-  return (
+const Book = ({ book, delete: handleRemoveBook }) => (
     <li className="book-card flex align-c">
     <div>
       <div className="main-info">
@@ -45,7 +36,7 @@ const Book = ({ book, delete: handleRemoveBook }) => {
       <div className="lower-btns fw-300 flex align-c">
         <p className="pointer">Comments</p>
         <div className="btn-divider" />
-        <button className="rmv-btn fw-300 pointer" type="button" onClick={() => deleteBook(book.id)}>Remove</button>
+        <button className="rmv-btn fw-300 pointer" type="button" onClick={() => deleteBook(book.id, handleRemoveBook, book)}>Remove</button>
         <div className="btn-divider" />
         <p className="pointer">Edit</p>
       </div>
@@ -67,8 +58,7 @@ const Book = ({ book, delete: handleRemoveBook }) => {
       <button className="updt-progress fw-300 pointer" type="button">UPDATE PROGRESS</button>
     </div>
   </li>
-  );
-};
+);
 
 Book.propTypes = {
   book: PropTypes.shape({
