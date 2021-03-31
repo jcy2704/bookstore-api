@@ -1,4 +1,10 @@
+Rails.application.routes.default_url_options[:host] = 'localhost:3001'
+
 Rails.application.routes.draw do
+  namespace :api, defaults: { format: :json } do
+    resource :users, only: %w[show]
+  end
+
   devise_for :users,
              defaults: { format: :json },
              path: '',
