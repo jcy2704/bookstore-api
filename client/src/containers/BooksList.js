@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Book from '../components/Book';
 import { loadBooks, removeBook } from '../actions/index';
-import { getBooks } from '../javascripts/api_methods/api';
-import { filteredBooks } from '../javascripts/filter';
+import { getBooks } from '../helpers/api_methods/api';
+import { filteredBooks } from '../helpers/filter';
 
 const BooksList = ({
   books, filter, delete: handleRemoveBook, loader

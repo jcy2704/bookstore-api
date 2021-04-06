@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { deleteBook } from '../javascripts/api_methods/api';
+import { deleteBook } from '../helpers/api_methods/api';
 
 const author = (book) => {
   if (book.author === '') {

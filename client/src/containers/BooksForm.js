@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { createBook } from '../actions';
-import { addBookToApi } from '../javascripts/api_methods/api';
+import { addBookToApi } from '../helpers/api_methods/api';
 
 const BooksForm = ({ bookCreator }) => {
   const [bookInfo, setBookInfo] = useState({
@@ -12,13 +12,8 @@ const BooksForm = ({ bookCreator }) => {
   });
 
   const handleChange = e => {
-    if (e.target.id === 'titleInput') {
-      setBookInfo({ ...bookInfo, title: e.target.value });
-    } else if (e.target.id === 'categoryInput') {
-      setBookInfo({ ...bookInfo, category: e.target.value });
-    } else {
-      setBookInfo({ ...bookInfo, author: e.target.value });
-    }
+    const { name, value } = e.target;
+    setBookInfo({ ...bookInfo, [name]: value });
   };
 
   const handleSubmit = () => {
@@ -37,9 +32,9 @@ const BooksForm = ({ bookCreator }) => {
       <form className="p-100 form">
         <h2 className="add-new-book">ADD NEW BOOK</h2>
         <div className="flex just-sb">
-          <input onChange={handleChange} id="titleInput" type="text" value={bookInfo.title} placeholder="Book Title" />
-          <input onChange={handleChange} id="authorInput" type="text" value={bookInfo.author} placeholder="Author" />
-          <select id="categoryInput" className="pointer" onChange={handleChange} value={bookInfo.category}>
+          <input onChange={handleChange} id="titleInput" name="title" type="text" value={bookInfo.title} placeholder="Book Title" />
+          <input onChange={handleChange} id="authorInput" name="author" type="text" value={bookInfo.author} placeholder="Author" />
+          <select id="categoryInput" className="pointer" name="category" onChange={handleChange} value={bookInfo.category}>
             <option className="categories-option" value="" disabled>Categories</option>
             {categories.map(cat => (
               <option key={cat} value={cat}>{cat}</option>

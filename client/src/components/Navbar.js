@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import CategoryFilter from './CategoryFilter';
 import { changeFilter } from '../actions/index';
+import { Link } from 'react-router-dom';
 
 const Navbar = ({ changeCat }) => {
   const changeCategory = e => {
@@ -16,14 +17,14 @@ const Navbar = ({ changeCat }) => {
       <header>
         <nav className="p-100 nav pos-rel flex">
           <h1 className="title pointer">
-            Bookstore CMS
+            <Link to="/">Bookstore CMS</Link>
           </h1>
           <div className="right-cont align-c flex">
-            <p className="book-header-title pointer">Books</p>
+            <Link to="/"><p className="book-header-title pointer">Books</p></Link>
             <CategoryFilter handleFilter={changeCategory} />
           </div>
           <div className="prof pointer flex align-c just-c">
-            <FontAwesomeIcon icon={faUser} />
+            <Link to="/login"><FontAwesomeIcon icon={faUser} /></Link>
           </div>
         </nav>
       </header>
